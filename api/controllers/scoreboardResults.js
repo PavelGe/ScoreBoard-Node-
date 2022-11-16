@@ -9,10 +9,6 @@ module.exports.CREATE_SCORE = function (req, res) {
   });
 
   score.save().then((result) => {
-    ScoreboardResultsSchema.updateOne(
-      { _id: result._id },
-      { id: result._id }
-    ).exec();
     ScoreboardSchema.updateOne(
       { _id: req.body.id },
       { $push: { results_ids: result._id } }
